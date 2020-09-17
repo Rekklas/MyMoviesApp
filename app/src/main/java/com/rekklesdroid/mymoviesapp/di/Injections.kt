@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.rekklesdroid.mymoviesapp.cloud.CloudApi
 import com.rekklesdroid.mymoviesapp.local.AppDatabase
+import com.rekklesdroid.mymoviesapp.repo.MoviesRepository
 import com.rekklesdroid.mymoviesapp.ui.MoviesViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -12,23 +13,27 @@ import org.koin.dsl.module
 
 fun initInjections(application: Application) {
 
-	val viewModels = module {
-		viewModel { MoviesViewModel() }
-	}
+    val viewModels = module {
+        viewModel { MoviesViewModel(get()) }
+    }
 
-	val repository = module {
+    val repository = module {
+        single {
+            Room.databaseBuilder(get(), AppDatabase::class.java, "database")
+                .build()
+        }
 		single {
-			Room.databaseBuilder(get(), AppDatabase::class.java, "database")
-				.build()
+			MoviesRepository(get(), get())
 		}
 
-	}
+    }
 
-	val services = module {
-		single { CloudApi() }
-	}
+    val services = module {
+        single { CloudApi() }
+    }
 
-	startKoin {
-		androidContext(application)
-	}
+    startKoin {
+        androidContext(application)
+        modules(viewModels, services, repository)
+    }
 }
