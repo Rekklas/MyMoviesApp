@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appx="http://schemas.android.com/apk/res-auto"
+    android:layout_width="120dp"
+    android:layout_height="220dp"
+    android:layout_margin="4dp">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        appx:layout_constraintEnd_toEndOf="parent"
+        appx:layout_constraintStart_toStartOf="parent"
+        appx:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvGenres"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:ellipsize="end"
+        android:lines="3"
+        android:paddingEnd="4dp"
+        android:paddingStart="4dp"
+        appx:layout_constraintBottom_toBottomOf="parent"
+        appx:layout_constraintEnd_toEndOf="parent"
+        appx:layout_constraintStart_toStartOf="parent"
+        appx:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:lines="3"
+        android:paddingEnd="4dp"
+        android:paddingStart="4dp"
+        appx:layout_constraintBottom_toTopOf="@+id/tvGenres"
+        appx:layout_constraintEnd_toEndOf="parent"
+        appx:layout_constraintStart_toStartOf="parent"
+        appx:layout_constraintTop_toBottomOf="@+id/img" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
